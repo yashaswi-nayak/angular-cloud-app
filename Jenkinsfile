@@ -1,13 +1,13 @@
 pipeline{
     agent any;
-    tools {
-        nodejs 'Node12'
-    }
+
     stages{
         stage("Build"){
             steps{
-                sh 'sudo npm install'
-                sh 'ng build --prod'
+                nodejs(nodeJSInstallationName: 'Node12') {
+                    sh 'sudo npm install'
+                    sh 'ng build --prod'
+                }
             }
             post{
                 success{
