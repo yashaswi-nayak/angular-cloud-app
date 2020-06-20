@@ -19,22 +19,35 @@ pipeline{
             }
         }
 
-        // stage("Package"){
-        //     steps{
-        //         echo "====++++executing A++++===="
-        //     }
-        //     post{
-        //         always{
-        //             echo "====++++always++++===="
-        //         }
-        //         success{
-        //             echo "====++++A executed successfully++++===="
-        //         }
-        //         failure{
-        //             echo "====++++A execution failed++++===="
-        //         }
+        stage("Package"){
+            steps{
+                sh 'sudo docker build -t angular-webapp .'
+            }
+            post{
+                success{
+                    echo "PACKAGING SUCCESSFUL"
+                }
+                failure{
+                    echo "PACKAGING FAIL"
+                }
         
-        //     }
-        // }   
+            }
+        }
+
+        stage("Deploy"){
+            steps{
+                sh 'sudo docker rm -vf angular-webapp'
+                sh 'sudo docker run -d -p 80:80 --name angular-webapp angular-webapp:latest'
+            }
+            post{
+                success{
+                    echo "DEPLOYMENT SUCCESSFUL"
+                }
+                failure{
+                    echo "DEPLOYMENT FAIL"
+                }
+        
+            }
+        }   
     }
 }
