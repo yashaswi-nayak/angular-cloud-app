@@ -5,7 +5,7 @@ pipeline{
         stage("Build"){
             steps{
                 nodejs(nodeJSInstallationName: 'Node12') {
-                    npm install
+                    sh 'npm install'
                     sh 'ng build --prod'
                 }
             }
