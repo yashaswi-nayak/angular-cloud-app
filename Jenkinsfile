@@ -36,7 +36,7 @@ pipeline{
 
         stage("Deploy"){
             steps{
-                sh 'sudo docker rm -vf angular-webapp'
+                sh 'echo $(sudo docker rm -vf angular-webapp)'
                 sh 'sudo docker run -d -p 80:80 --name angular-webapp angular-webapp:latest'
             }
             post{
