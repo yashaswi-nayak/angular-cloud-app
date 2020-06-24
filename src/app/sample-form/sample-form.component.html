@@ -7,11 +7,6 @@
         <mat-icon matSuffix [ngClass]="valid? 'green': 'black'" (click)="enterUser()">account_circle</mat-icon>
         <mat-hint>A kickass username</mat-hint>
       </mat-form-field>
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Input</mat-label>
-        <input matInput >
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="enterUser()">Enter</button> -->
     </mat-card-content>
   </mat-card>
   <mat-card class="fact-card" *ngIf="display">
@@ -19,13 +14,34 @@
       <mat-card-title>Random Facts</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>
-        {{ displayFact.text }}
-      </p>
+      <section *ngIf="sectionFact">
+        <p>
+          {{ displayFact.text }}
+        </p>
+      </section>
+      <section *ngIf="!sectionFact">
+        <table>
+          <thead>
+            <th>Fact</th>
+            <th>Rating</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of factList.facts">
+              <td>{{row.text}}</td>
+              <td><button mat-icon-button (click)="rateFact(row.rating-1, row)">
+                  <mat-icon>arrow_circle_down</mat-icon>
+                </button>
+                {{row.rating}}<button mat-icon-button (click)="rateFact(row.rating+1, row)">
+                  <mat-icon>arrow_circle_up</mat-icon>
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Like</button>
-      <button mat-button>My List</button>
+      <button mat-button *ngIf="sectionFact" (click)="likedFact()">{{ likeLabel }}</button>
+      <button mat-button (click)='displayList()'>{{ sectionLabel }}</button>
     </mat-card-actions>
   </mat-card>
 </div>

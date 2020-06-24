@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { SampleFormComponent } from './sample-form/sample-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

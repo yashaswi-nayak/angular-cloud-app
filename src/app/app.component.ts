@@ -12,5 +12,8 @@ export class AppComponent implements OnInit {
 
   constructor(private appSvc: AppService, private dataSvc: SampleFormService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log('IN APP')
+    console.log('APP SAYs...', this.appSvc.checkUser());
+  }
 }
